@@ -77,10 +77,10 @@ def mypageview(request, author):
             return redirect("list")
         else:
             post_list = AudioModel.objects.filter(author__username = author)
-            return render(request, "mypage.html", {"post_list" : post_list, "author": author})
+            return render(request, "sharemypage.html", {"post_list" : post_list, "author": author})
     elif(request.user != author):
             post_list = AudioModel.objects.filter(author__username = author)
-            return render(request, "mypage.html", {"post_list" : post_list, "author": author})
+            return render(request, "sharemypage.html", {"post_list" : post_list, "author": author})
     else:
         post_list = AudioModel.objects.filter(author = request.user)
         return render(request, "mypage.html", {"post_list" : post_list, "author": request.user})
@@ -91,5 +91,3 @@ def rankingview(request):
     object_list = AudioModel.objects.all().order_by("-iine")
     print(request.user)
     return render(request, "ranking.html", {"object_list": object_list})
-
-    
