@@ -13,8 +13,9 @@
   <body> 
 {% if user.is_authenticated%}
   <h1>Mele</h1>
-  <h5>  </h5>
+  <h5>ver β.0.5  </h5>
   <h5>こんにちは{{request.user}}さん</h5>
+  <a href = "http://ok09ra.pythonanywhere.com/introductions/mele-introduction20210101.pdf" class = "btn btn-primary btn-sm">取り扱い説明書</a>
   <h5>  </h5>
   <a href = "{% url "list"  %}" class = "btn btn-primary btn-sm">メインページ</a>
   <a href = "{% url "create"  %}" class = "btn btn-primary btn-sm">投稿</a>
@@ -24,8 +25,10 @@
   <h5>  </h5>
 {% else %}
   <h1>Mele</h1>
-  <h5>  </h5>
+  <h5>ver β.0.5 </h5>
   <a href = "{% url "login"  %}" class = "w-100 btn btn-outline-primary btn-sm">log in</a>
+  <h5>  </h5>
+  <a href = "http://ok09ra.pythonanywhere.com/introductions/mele-introduction20210101.pdf" class = "btn btn-primary btn-sm">取り扱い説明書</a>
   <h5>  </h5>
   <a href = "{% url "list"  %}" class = "btn btn-primary btn-sm">メインページ</a>
   <a href = "{% url "create"  %}" class = "btn btn-primary btn-sm">投稿</a>
