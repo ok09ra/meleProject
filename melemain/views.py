@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AnonymousUser, User
 from django.db import IntegrityError
 from django.contrib.auth import authenticate, login, logout, get_user
 from .models import AudioModel
@@ -72,19 +72,17 @@ def evaluationview(request, pk):
     return JsonResponse({"iine" : post.iine})
 
 def mypageview(request, author):
-    if(User.is_anonymous):
-        if(author  == "AnonymousUser" ):
-            return redirect("list")
+    if(str(request.user) == author):
+        if(author == "AnonymousUser"):
+            return redirect("login")
         else:
-            post_list = AudioModel.objects.filter(author__username = author)
-            return render(request, "sharemypage.html", {"post_list" : post_list, "author": author})
-    elif(request.user != author):
-            post_list = AudioModel.objects.filter(author__username = author)
-            return render(request, "sharemypage.html", {"post_list" : post_list, "author": author})
+            post_list = AudioModel.objects.filter(author = request.user)
+            return render(request, "mypage.html", {"post_list" : post_list, "author": request.user})
+    elif(author  == "AnonymousUser" ):
+            return redirect("list")
     else:
-        post_list = AudioModel.objects.filter(author = request.user)
-        return render(request, "mypage.html", {"post_list" : post_list, "author": request.user})
-        
+        post_list = AudioModel.objects.filter(author__username = author)
+        return render(request, "sharemypage.html", {"post_list" : post_list, "author": author})     
             
 
 def rankingview(request):

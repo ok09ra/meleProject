@@ -11,13 +11,28 @@
 {% endblock header %}
   </head>
   <body> 
+{% if user.is_authenticated%}
   <h1>Mele</h1>
+  <h5>  </h5>
+  <h5>こんにちは{{request.user}}さん</h5>
+  <h5>  </h5>
   <a href = "{% url "list"  %}" class = "btn btn-primary btn-sm">メインページ</a>
   <a href = "{% url "create"  %}" class = "btn btn-primary btn-sm">投稿</a>
   <a href = "{% url "ranking"  %}" class = "btn btn-primary btn-sm">ランキング</a>
   <a href = "{% url "mypage" user  %}" class = "btn btn-primary btn-sm">マイページ</a>
-  <a href = "{% url "login"  %}" class = "btn btn-outline-primary btn-sm">log in</a>
-
+  <a href = "{% url "logout"  %}" class = "btn btn-outline-primary btn-sm">log out</a>
+  <h5>  </h5>
+{% else %}
+  <h1>Mele</h1>
+  <h5>  </h5>
+  <a href = "{% url "login"  %}" class = "w-100 btn btn-outline-primary btn-sm">log in</a>
+  <h5>  </h5>
+  <a href = "{% url "list"  %}" class = "btn btn-primary btn-sm">メインページ</a>
+  <a href = "{% url "create"  %}" class = "btn btn-primary btn-sm">投稿</a>
+  <a href = "{% url "ranking"  %}" class = "btn btn-primary btn-sm">ランキング</a>
+  <a href = "{% url "mypage" user  %}" class = "btn btn-primary btn-sm">マイページ</a>
+  <h5>  </h5>
+{% endif %}
 {% block content %}
 {% endblock content %}
     <!-- Optional JavaScript; choose one of the two! -->
